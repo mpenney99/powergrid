@@ -1,4 +1,4 @@
-define(['./jquery', 'vein', './utils', './promise', 'require', './translations'], function($, vein, utils, Promise, require, translations) {
+define(['./jquery', 'vein', './utils', './promise', './extensions/extensions', './translations'], function($, vein, utils, Promise, extensions, translations) {
     "use strict";
 
     /**
@@ -181,7 +181,7 @@ define(['./jquery', 'vein', './utils', './promise', 'require', './translations']
                 callback();
             }
         },
-
+        
         /**
          * Recursively load extensions and their dependencies
          * @private
@@ -201,8 +201,7 @@ define(['./jquery', 'vein', './utils', './promise', 'require', './translations']
             var newkeys = [];
             for (var i = 0, n = keys.length; i < n; i++) {
                 var key = keys[i];
-                var plugin = require('./extensions/' + key);
-                plugins[key] = plugin;
+                var plugin = extensions[key];
                 pluginList.push(key);
 
                 var reqs = plugin.requires;
